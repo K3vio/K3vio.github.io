@@ -1,0 +1,75 @@
+:root {
+  --paper: #faf8f4;
+  --paper-alt: #f3f0e7;
+  --paper-line: #e4dfd1;
+  --ink: #1c1a16;
+  --ink-muted: #635d51;
+
+  --terminal: #12141a;
+  --terminal-alt: #191c24;
+  --terminal-line: #272c38;
+  --terminal-ink: #f4f2ec;
+  --terminal-muted: #8b93a1;
+
+  --cyan: #7fd8cf;
+  --gold: #c99a4b;
+  --gold-soft: rgba(201, 154, 75, 0.13);
+  --teal: #4aa79c;
+  --blue: #6f8fc4;
+  --rust: #c47a63;
+
+  --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-serif: 'Lora', Georgia, 'Times New Roman', serif;
+
+  --max-width: 1140px;
+  --gutter: 2.5rem;
+  --nav-height: 54px;
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-serif);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+}
+
+ul,
+ol {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-mono);
+  line-height: 1.2;
+  margin: 0;
+  font-weight: 600;
+}
+
+.mono {
+  font-family: var(--font-mono);
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
