@@ -23,6 +23,17 @@ export const story = {
   pullQuote: 'I have perfect pitch, which means I tend to notice small details. That habit carries into how I code: I fine-tune things until they feel right.',
 }
 
+export const identity = [
+  { key: 'school', value: '"UNSW"', type: 'str' },
+  { key: 'degree', value: '"Computer Science"', type: 'str' },
+  { key: 'major', value: '"Cybersecurity"', type: 'str' },
+  { key: 'minor', value: '"Information Systems"', type: 'str' },
+  { key: 'graduates', value: '2027', type: 'num' },
+  { key: 'based_in', value: '"Sydney, AU"', type: 'str' },
+  { key: 'languages', value: '["en", "id", "zh"]', type: 'arr' },
+  { key: 'perfect_pitch', value: 'true', type: 'bool' },
+]
+
 export const education = {
   degree: 'Bachelor of Computer Science, Minor in Information Systems',
   school: 'University of New South Wales',

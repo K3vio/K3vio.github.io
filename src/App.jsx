@@ -1,6 +1,7 @@
-import { useState } from 'react'
-import { profile, story, education, experiences, projects, skillGroups, languages } from './data'
+import { useCallback, useEffect, useState } from 'react'
+import { profile, story, identity, education, experiences, projects, skillGroups, languages } from './data'
 import Piano from './Piano'
+import Terminal from './Terminal'
 import './App.css'
 
 const NAV_LINKS = [
@@ -11,17 +12,6 @@ const NAV_LINKS = [
   { id: 'skills', label: 'skills' },
   { id: 'education', label: 'education' },
   { id: 'contact', label: 'contact' },
-]
-
-const IDENTITY = [
-  { key: 'school', value: '"UNSW"', type: 'str' },
-  { key: 'degree', value: '"Computer Science"', type: 'str' },
-  { key: 'major', value: '"Cybersecurity"', type: 'str' },
-  { key: 'minor', value: '"Information Systems"', type: 'str' },
-  { key: 'graduates', value: '2027', type: 'num' },
-  { key: 'based_in', value: '"Sydney, AU"', type: 'str' },
-  { key: 'languages', value: '["en", "id", "zh"]', type: 'arr' },
-  { key: 'perfect_pitch', value: 'true', type: 'bool' },
 ]
 
 const GROUP_COLORS = ['#c99a4b', '#4aa79c', '#6f8fc4', '#c47a63']
@@ -67,7 +57,7 @@ function IdentityCard() {
       <pre className="identity-code mono">
         <code>
           <span className="tok-punc">{'{'}</span>
-          {IDENTITY.map((row) => (
+          {identity.map((row) => (
             <span key={row.key} className="identity-line">
               {'  '}
               <span className="tok-key">&quot;{row.key}&quot;</span>
@@ -415,8 +405,39 @@ function IconGithub() {
   )
 }
 
+function TerminalLauncher({ onOpen }) {
+  return (
+    <button type="button" className="term-launcher mono" onClick={onOpen}>
+      <span className="term-launcher-caret" aria-hidden="true">
+        &gt;_
+      </span>
+      terminal
+      <kbd className="term-launcher-key">`</kbd>
+    </button>
+  )
+}
+
 function App() {
   const [workTab, setWorkTab] = useState('experience')
+  const [terminalOpen, setTerminalOpen] = useState(false)
+
+  const navigate = useCallback((target, tab) => {
+    if (tab) setWorkTab(tab)
+    const element = document.getElementById(target)
+    if (element) element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }, [])
+
+  useEffect(() => {
+    function handleKey(event) {
+      const typing = event.target instanceof Element && event.target.closest('input, textarea, [contenteditable="true"]')
+      const shortcut = event.key === '`' || (event.key.toLowerCase() === 'k' && (event.metaKey || event.ctrlKey))
+      if (!shortcut || typing) return
+      event.preventDefault()
+      setTerminalOpen((v) => !v)
+    }
+    window.addEventListener('keydown', handleKey)
+    return () => window.removeEventListener('keydown', handleKey)
+  }, [])
 
   return (
     <>
@@ -432,6 +453,8 @@ function App() {
         <Contact />
       </main>
       <Footer />
+      {!terminalOpen ? <TerminalLauncher onOpen={() => setTerminalOpen(true)} /> : null}
+      <Terminal open={terminalOpen} onClose={() => setTerminalOpen(false)} onNavigate={navigate} />
     </>
   )
 }
