@@ -204,7 +204,7 @@
     border-right: 3px solid var(--cyan);
     animation:
       typing 1.3s steps(24, end) forwards,
-      blink-caret 0.85s step-end 6;
+      blink-caret 0.85s step-end infinite;
   }
 }
 
