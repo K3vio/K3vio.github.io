@@ -1,6 +1,6 @@
 export const profile = {
   name: 'Kevin Sebastian Tukgali',
-  tagline: 'Computer Science Student — Cybersecurity',
+  tagline: 'Computer Science Student, Cybersecurity',
   location: 'Sydney, Australia',
   email: 'kevin.s.t2006@gmail.com',
   github: 'https://github.com/K3vio',
@@ -9,8 +9,8 @@ export const profile = {
 
 export const story = {
   paragraphs: [
-    `Hi, I'm Kevin — a Computer Science undergrad at UNSW who originally wanted to
-    pursue music, but fell in love with the terminal instead. I grew up with
+    `Hi, I'm Kevin, a Computer Science undergrad at UNSW who originally wanted to
+    pursue music but fell in love with the terminal instead. I grew up with
     instruments and computers in equal measure; gaming was a huge part of my
     childhood, and it's probably where the two interests first tangled together.`,
     `Now I'm specialising in Cybersecurity with a minor in Information Systems,
@@ -20,16 +20,21 @@ export const story = {
     `My long-term goal is to build creative, meaningful software. Music just
     happens to be where that obsession began.`,
   ],
-  pullQuote: 'I have perfect pitch — which means I tend to notice small details. That habit carries into how I code: I fine-tune things until they feel right.',
+  pullQuote: 'I have perfect pitch, which means I tend to notice small details. That habit carries into how I code: I fine-tune things until they feel right.',
 }
 
 export const education = {
   degree: 'Bachelor of Computer Science, Minor in Information Systems',
   school: 'University of New South Wales',
-  period: '2024 — 2027',
+  period: '2024-2027',
 }
 
 export const experiences = [
+  {
+    title: 'LifeGrain Kitchen',
+    period: '2026',
+    points: ['Handled food prep for the LifeGrain group.'],
+  },
   {
     title: 'Finalist, Lyra x ICON Hackathon',
     period: '2026',
@@ -39,7 +44,7 @@ export const experiences = [
   },
   {
     title: 'Kitchen Hand & Waitstaff, Mamak’s Village Restaurant',
-    period: 'March 2026 — Present',
+    period: 'March 2026 - Present',
     points: [
       'Handled dual kitchen hand and front-of-house duties in a fast-paced restaurant, preparing food to standard while serving customers and managing enquiries.',
     ],
@@ -77,6 +82,40 @@ export const experiences = [
   },
 ]
 
+export const projects = [
+  {
+    title: 'Benchmarking AI Agent Security',
+    status: 'Ongoing',
+    description:
+      'Testing whether autonomous AI agents can be tricked into executing actions against their guidelines.',
+  },
+  {
+    title: 'Research Paper: AI and Misinformation',
+    status: 'Ongoing',
+    description:
+      'Writing a research paper on how AI models respond to misinformation.',
+  },
+  {
+    title: 'LLMs Misinformation Detector',
+    description: 'Built a multi LLM misinformation analysis tool.',
+  },
+  {
+    title: 'Smart Meeting Summarizer',
+    description:
+      'Live meeting transcription and summarisation, built with the Mistral API.',
+  },
+  {
+    title: 'AI Powered Smart Calendar',
+    description:
+      'Plans meetings for users and provides scheduling suggestions. Built for the Lyra x ICON Hackathon.',
+  },
+  {
+    title: 'CSS Battle Certification',
+    status: 'Completed',
+    description: 'Finished the CSS Battle course.',
+  },
+]
+
 export const skillGroups = [
   {
     title: 'Programming',
@@ -99,4 +138,5 @@ export const skillGroups = [
 export const languages = [
   { name: 'English', level: 'Fluent / Native' },
   { name: 'Indonesian', level: 'Fluent / Native' },
+  { name: 'Mandarin', level: 'Basic Conversational' },
 ]

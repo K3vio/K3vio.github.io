@@ -1,11 +1,13 @@
-import { profile, story, education, experiences, skillGroups, languages } from './data'
+import { useState } from 'react'
+import { profile, story, education, experiences, projects, skillGroups, languages } from './data'
 import Piano from './Piano'
 import './App.css'
 
 const NAV_LINKS = [
   { id: 'story', label: 'story' },
   { id: 'play', label: 'play' },
-  { id: 'experience', label: 'experience' },
+  { id: 'experience', label: 'experience', target: 'work', tab: 'experience' },
+  { id: 'projects', label: 'projects', target: 'work', tab: 'projects' },
   { id: 'skills', label: 'skills' },
   { id: 'education', label: 'education' },
   { id: 'contact', label: 'contact' },
@@ -18,13 +20,13 @@ const IDENTITY = [
   { key: 'minor', value: '"Information Systems"', type: 'str' },
   { key: 'graduates', value: '2027', type: 'num' },
   { key: 'based_in', value: '"Sydney, AU"', type: 'str' },
-  { key: 'languages', value: '["en", "id"]', type: 'arr' },
+  { key: 'languages', value: '["en", "id", "zh"]', type: 'arr' },
   { key: 'perfect_pitch', value: 'true', type: 'bool' },
 ]
 
 const GROUP_COLORS = ['#c99a4b', '#4aa79c', '#6f8fc4', '#c47a63']
 
-function Nav() {
+function Nav({ onSelectTab }) {
   return (
     <header className="nav">
       <div className="nav-inner">
@@ -40,7 +42,12 @@ function Nav() {
           <ul className="nav-links mono">
             {NAV_LINKS.map((link) => (
               <li key={link.id}>
-                <a href={`#${link.id}`}>./{link.label}</a>
+                <a
+                  href={`#${link.target ?? link.id}`}
+                  onClick={link.tab ? () => onSelectTab(link.tab) : undefined}
+                >
+                  ./{link.label}
+                </a>
               </li>
             ))}
           </ul>
@@ -159,7 +166,8 @@ function Story() {
             <div className="tag-row">
               {languages.map((lang) => (
                 <span key={lang.name} className="tag">
-                  {lang.name} <span className="tag-muted">— {lang.level}</span>
+                  {lang.name}
+                  <span className="tag-muted">: {lang.level}</span>
                 </span>
               ))}
             </div>
@@ -174,38 +182,98 @@ function Play() {
   return (
     <Section id="play" index="02" title="Play" variant="dark">
       <p className="section-lede">
-        Music is where the obsession with getting things exactly right started. Here&apos;s a small piano —
-        tuned, like everything else on this page, until it felt right.
+        Music is where the obsession with getting things exactly right started. Here&apos;s a small piano,
+        tuned like everything else on this page until it felt right.
       </p>
       <Piano />
     </Section>
   )
 }
 
-function Experience() {
+const WORK_TABS = [
+  { id: 'experience', label: 'experience', count: experiences.length },
+  { id: 'projects', label: 'projects', count: projects.length },
+]
+
+function Work({ activeTab, onTabChange }) {
+  function handleKeyDown(event) {
+    const index = WORK_TABS.findIndex((tab) => tab.id === activeTab)
+    if (event.key === 'ArrowRight') {
+      event.preventDefault()
+      onTabChange(WORK_TABS[(index + 1) % WORK_TABS.length].id)
+    }
+    if (event.key === 'ArrowLeft') {
+      event.preventDefault()
+      onTabChange(WORK_TABS[(index - 1 + WORK_TABS.length) % WORK_TABS.length].id)
+    }
+  }
+
   return (
-    <Section id="experience" index="03" title="Experience">
-      <ol className="timeline">
-        {experiences.map((exp, index) => (
-          <li
-            key={exp.title}
-            className={`timeline-item${index === experiences.length - 1 ? ' timeline-item-last' : ''}`}
+    <Section id="work" index="03" title="Work">
+      <div className="tabs" role="tablist" aria-label="Experience and projects" onKeyDown={handleKeyDown}>
+        {WORK_TABS.map((tab) => (
+          <button
+            key={tab.id}
+            type="button"
+            role="tab"
+            id={`tab-${tab.id}`}
+            aria-selected={activeTab === tab.id}
+            aria-controls={`panel-${tab.id}`}
+            tabIndex={activeTab === tab.id ? 0 : -1}
+            className={`tab${activeTab === tab.id ? ' is-active' : ''}`}
+            onClick={() => onTabChange(tab.id)}
           >
-            <span className="timeline-node" aria-hidden="true" />
-            <div className="timeline-content">
-              <div className="timeline-header">
-                <h3>{exp.title}</h3>
-                <span className="mono timeline-period">{exp.period}</span>
-              </div>
-              <ul className="timeline-points">
-                {exp.points.map((point) => (
-                  <li key={point}>{point}</li>
-                ))}
-              </ul>
-            </div>
-          </li>
+            ./{tab.label}
+            <span className="tab-count">{tab.count}</span>
+          </button>
         ))}
-      </ol>
+      </div>
+
+      {activeTab === 'experience' ? (
+        <div role="tabpanel" id="panel-experience" aria-labelledby="tab-experience">
+          <ol className="timeline">
+            {experiences.map((exp, index) => (
+              <li
+                key={exp.title}
+                className={`timeline-item${index === experiences.length - 1 ? ' timeline-item-last' : ''}`}
+              >
+                <span className="timeline-node" aria-hidden="true" />
+                <div className="timeline-content">
+                  <div className="timeline-header">
+                    <h3>{exp.title}</h3>
+                    <span className="mono timeline-period">{exp.period}</span>
+                  </div>
+                  <ul className="timeline-points">
+                    {exp.points.map((point) => (
+                      <li key={point}>{point}</li>
+                    ))}
+                  </ul>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
+      ) : (
+        <div role="tabpanel" id="panel-projects" aria-labelledby="tab-projects">
+          <div className="project-grid">
+            {projects.map((project, index) => (
+              <article
+                key={project.title}
+                className="project-card"
+                style={{ '--card-color': GROUP_COLORS[index % GROUP_COLORS.length] }}
+              >
+                <div className="project-head">
+                  <h3>{project.title}</h3>
+                  {project.status ? (
+                    <span className="mono project-status">{project.status}</span>
+                  ) : null}
+                </div>
+                <p className="project-description">{project.description}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      )}
     </Section>
   )
 }
@@ -309,15 +377,17 @@ function IconGithub() {
 }
 
 function App() {
+  const [workTab, setWorkTab] = useState('experience')
+
   return (
     <>
-      <Nav />
+      <Nav onSelectTab={setWorkTab} />
       <main>
         <Hero />
         <Story />
         <WaveBand />
         <Play />
-        <Experience />
+        <Work activeTab={workTab} onTabChange={setWorkTab} />
         <Skills />
         <Education />
         <Contact />

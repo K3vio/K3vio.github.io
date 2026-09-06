@@ -189,7 +189,7 @@ function Piano() {
     <div className="piano">
       <div className="piano-readout">
         <span className="piano-readout-label">now playing</span>
-        <span className="piano-readout-note">{lastNote ?? '—'}</span>
+        <span className="piano-readout-note">{lastNote ?? '--'}</span>
         <span className="piano-readout-tuning">A4 = 440Hz</span>
       </div>
       <div className="piano-scroll">
@@ -224,7 +224,7 @@ function Piano() {
         </div>
       </div>
       <p className="piano-caption">
-        click the keys, or play with your keyboard — <span className="mono">a s d f g h j k</span> for white,{' '}
+        click the keys, or play with your keyboard: <span className="mono">a s d f g h j k</span> for white,{' '}
         <span className="mono">w e t y u</span> for black.
       </p>
     </div>
