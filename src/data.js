@@ -1,6 +1,6 @@
 export const profile = {
   name: 'Kevin Sebastian Tukgali',
-  tagline: 'Computer Science Student, Cybersecurity',
+  tagline: 'Computer Science Student, Security Engineering',
   location: 'Sydney, Australia',
   email: 'kevin.s.t2006@gmail.com',
   github: 'https://github.com/K3vio',
@@ -13,7 +13,7 @@ export const story = {
     pursue music but fell in love with the terminal instead. I grew up with
     instruments and computers in equal measure; gaming was a huge part of my
     childhood, and it's probably where the two interests first tangled together.`,
-    `Now I'm specialising in Cybersecurity with a minor in Information Systems,
+    `Now I'm specialising in Security Engineering with a minor in Information Systems,
     picking apart systems the same way I used to pick apart chords. Experienced
     in collaborative, project-based environments through hackathons and personal
     builds, and always looking to learn through real world experience and feedback.`,
@@ -25,8 +25,8 @@ export const story = {
 
 export const identity = [
   { key: 'school', value: '"UNSW"', type: 'str' },
-  { key: 'degree', value: '"Computer Science"', type: 'str' },
-  { key: 'major', value: '"Cybersecurity"', type: 'str' },
+  { key: 'major', value: '"Computer Science"', type: 'str' },
+  { key: 'specialisation', value: '"Security Engineering"', type: 'str' },
   { key: 'minor', value: '"Information Systems"', type: 'str' },
   { key: 'graduates', value: '2027', type: 'num' },
   { key: 'based_in', value: '"Sydney, AU"', type: 'str' },
@@ -35,7 +35,7 @@ export const identity = [
 ]
 
 export const education = {
-  degree: 'Bachelor of Computer Science, Minor in Information Systems',
+  degree: 'Bachelor of Computer Science (Security Engineering), Minor in Information Systems',
   school: 'University of New South Wales',
   period: '2024-2027',
 }

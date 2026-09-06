@@ -173,7 +173,7 @@
   margin: 0 auto;
   padding: 5.5rem var(--gutter);
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 340px;
+  grid-template-columns: minmax(0, 1fr) 385px;
   gap: 3.5rem;
   align-items: center;
 }
