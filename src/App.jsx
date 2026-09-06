@@ -256,21 +256,40 @@ function Work({ activeTab, onTabChange }) {
       ) : (
         <div role="tabpanel" id="panel-projects" aria-labelledby="tab-projects">
           <div className="project-grid">
-            {projects.map((project, index) => (
-              <article
-                key={project.title}
-                className="project-card"
-                style={{ '--card-color': GROUP_COLORS[index % GROUP_COLORS.length] }}
-              >
-                <div className="project-head">
-                  <h3>{project.title}</h3>
-                  {project.status ? (
-                    <span className="mono project-status">{project.status}</span>
-                  ) : null}
-                </div>
-                <p className="project-description">{project.description}</p>
-              </article>
-            ))}
+            {projects.map((project, index) => {
+              const style = { '--card-color': GROUP_COLORS[index % GROUP_COLORS.length] }
+              const body = (
+                <>
+                  <div className="project-head">
+                    <h3>{project.title}</h3>
+                    <span className="project-meta">
+                      {project.status ? (
+                        <span className="mono project-status">{project.status}</span>
+                      ) : null}
+                      {project.url ? <IconArrow /> : null}
+                    </span>
+                  </div>
+                  <p className="project-description">{project.description}</p>
+                </>
+              )
+
+              return project.url ? (
+                <a
+                  key={project.title}
+                  className="project-card project-card-link"
+                  style={style}
+                  href={project.url}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {body}
+                </a>
+              ) : (
+                <article key={project.title} className="project-card" style={style}>
+                  {body}
+                </article>
+              )
+            })}
           </div>
         </div>
       )}
@@ -364,6 +383,26 @@ function IconMail() {
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <path d="M2 6h20v12H2z" />
       <path d="M22 6l-10 7L2 6" />
+    </svg>
+  )
+}
+
+function IconArrow() {
+  return (
+    <svg
+      className="project-link-icon"
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M7 17L17 7" />
+      <path d="M8 7h9v9" />
     </svg>
   )
 }

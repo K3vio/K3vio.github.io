@@ -44,7 +44,7 @@ export const experiences = [
   },
   {
     title: 'Kitchen Hand & Waitstaff, Mamak’s Village Restaurant',
-    period: 'March 2026 - Present',
+    period: '2025',
     points: [
       'Handled dual kitchen hand and front-of-house duties in a fast-paced restaurant, preparing food to standard while serving customers and managing enquiries.',
     ],
@@ -98,16 +98,19 @@ export const projects = [
   {
     title: 'LLMs Misinformation Detector',
     description: 'Built a multi LLM misinformation analysis tool.',
+    url: 'https://github.com/K3vio/LLM-Misinformation-Detector',
   },
   {
     title: 'Smart Meeting Summarizer',
     description:
       'Live meeting transcription and summarisation, built with the Mistral API.',
+    url: 'https://github.com/K3vio/MeetSumAI',
   },
   {
     title: 'AI Powered Smart Calendar',
     description:
       'Plans meetings for users and provides scheduling suggestions. Built for the Lyra x ICON Hackathon.',
+    url: 'https://github.com/K3vio/FlowCalAI',
   },
   {
     title: 'CSS Battle Certification',
